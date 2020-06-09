@@ -1,27 +1,10 @@
-class Node:
-    def __init__(self, value, next=None):
-        self.value = value
-        self.next_node = next
-
-    def get_value(self):
-        # returns the node's data
-        return self.value
-
-    def get_next(self):
-        # returns the thing pointed at by this node's `next` reference
-        return self.next_node
-
-    def set_next(self, new_next):
-        # sets this node's `next` reference to `new_next`
-        self.next_node = new_next
-
-
 class LinkedList:
     def __init__(self):
         # the first Node in the LinkedList
         self.head = None
         # the last Node in the LinkedList
         self.tail = None
+        self.size = 0
 
     """
     Adds `data` to the end of the LinkedList 
@@ -31,6 +14,7 @@ class LinkedList:
     def add_to_tail(self, data):
         # wrap the `data` in a Node instance
         new_node = Node(data)
+        self.size += 1
 
         # what about the empty case, when both self.head = None and self.tail = None?
         if not self.head and not self.tail:
@@ -79,7 +63,7 @@ class LinkedList:
             # `current` is now pointing at the Node right
             # before the tail Node
             self.tail = current
-
+        self.size -= 1
         return data
 
     """
@@ -94,6 +78,7 @@ class LinkedList:
         data = self.head.get_value()
         # both head and tail refer to the same Node
         # there's only one Node in the linked list
+        self.size -= 1
         if self.head is self.tail:
             # set both to be None
             self.head = None
@@ -156,3 +141,26 @@ class LinkedList:
             current = current.get_next()
 
         return max_so_far
+
+    """get the count of the """
+
+    def getSize(self):
+        return self.size
+
+
+class Node:
+    def __init__(self, value, next=None):
+        self.value = value
+        self.next_node = next
+
+    def get_value(self):
+        # returns the node's data
+        return self.value
+
+    def get_next(self):
+        # returns the thing pointed at by this node's `next` reference
+        return self.next_node
+
+    def set_next(self, new_next):
+        # sets this node's `next` reference to `new_next`
+        self.next_node = new_next
