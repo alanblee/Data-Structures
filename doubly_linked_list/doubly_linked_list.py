@@ -41,6 +41,11 @@ class ListNode:
 """Our doubly-linked list class. It holds references to
 the list's head and tail nodes."""
 
+new_node = ListNode(2)
+new_node.insert_after(3)
+new_node.insert_before(1)
+print(new_node.prev.next.value)
+
 
 class DoublyLinkedList:
     def __init__(self, node=None):
@@ -98,7 +103,23 @@ class DoublyLinkedList:
     the old tail node's next pointer accordingly."""
 
     def add_to_tail(self, value):
-        pass
+        current_tail = self.tail
+        new_node = ListNode(value)
+        if self.length < 1:
+            self.head = new_node
+            self.tail = new_node
+            self.length += 1
+        elif self.length == 1:
+            self.head.next = new_node
+            self.head.prev = None
+            self.tail = new_node
+            self.tail.prev = self.head
+            self.length += 1
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
+            self.tail.prev = current_tail
+            self.length += 1
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
