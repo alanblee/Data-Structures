@@ -10,6 +10,8 @@ This part of the project comprises two days:
    on the BSTNode class.
 """
 
+from collections import deque
+
 
 class BSTNode:
     def __init__(self, value):
@@ -80,17 +82,45 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if node:
+            node.in_order_print(node.left)
+            print(node.value)
+            node.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        # initialize a queue
+        que = deque()
+        # add first node to the que
+        que.append(node)
+
+        # loop through the queue
+        while len(que) > 0:
+            # pop the first node out
+            current_node = que.popleft()
+            if current_node.left:
+                que.append(current_node.left)
+            if current_node.right:
+                que.append(current_node.right)
+            print(current_node.value)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        # initialize stack
+        stack = []
+        # append the starting node to stack
+        stack.append(node)
+
+        # loop through the stack and print the value
+        while len(stack) > 0:
+            current_node = stack.pop()
+            if current_node.left:
+                stack.append(current_node.left)
+            if current_node.right:
+                stack.append(current_node.right)
+            print(current_node.value)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
